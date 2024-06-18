@@ -59,21 +59,11 @@ function jogo() {
     positionx += velx;
     positiony += vely;
 
-    //Espelhamento
-    if (positionx < 0) {
-        positionx = 29
-    }
-    if (
-        positionx > 29) {
-        positionx = 0
-    }
-    if (positiony > 29) {
-        positiony = 0
-        positionx++
-    }
-    if (positiony < 0) {
-        positiony = 29
-    }
+    // Espelhamento
+    if (positionx < 0) positionx = canvas.width / grade - 1;
+    if (positionx >= canvas.width / grade) positionx = 0;
+    if (positiony < 0) positiony = canvas.height / grade - 1;
+    if (positiony >= canvas.height / grade) positiony = 0;
 
     //Configurar a cobra
     ctx.fillStyle = "#02bf03";
@@ -101,8 +91,8 @@ function jogo() {
     //comendo 
     if (positionx == comidax && positiony == comiday) {
         tam++;
-        comidax = Math.floor(Math.random() * grade);
-        comiday = Math.floor(Math.random() * grade);
+        comidax = Math.floor(Math.random() * (canvas.width / grade));
+        comiday = Math.floor(Math.random() * (canvas.height / grade));
         console.log(pontos)
     }
 

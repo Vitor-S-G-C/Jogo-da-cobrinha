@@ -13,6 +13,7 @@ window.onload = function () {
     vely = 0;
     grade = 20;
     tam = 3;
+    pontos = 0;
 
 
     //Esse comando vai chamar a função jogo a cada 100 Milesegundos
@@ -54,71 +55,56 @@ function jogo() {
     ctx.fillStyle = "#2980B9";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    //dESLOCAMENTO DA COBRA
+    //DESLOCAMENTO DA COBRA
     positionx += velx;
     positiony += vely;
 
-    //POSSIÇÃO DA COBRA
-    cobra.push({ x: positionx, y: positiony }),
-        console.log(cobra[0])
-
-    //Espelhamento 
+    //Espelhamento
     if (positionx < 0) {
         positionx = 29
     }
-    else if (
+    if (
         positionx > 29) {
         positionx = 0
     }
-    else if (positiony > 29) {
+    if (positiony > 29) {
         positiony = 0
         positionx++
     }
-    else if (positiony < 0) {
+    if (positiony < 0) {
         positiony = 29
     }
 
-
-
     //Configurar a cobra
     ctx.fillStyle = "#02bf03";
-
-
     for (let i = 0; i < cobra.length; i++) {
-        //movimentação da cobra
-
-
-        //comportamento da cobra
         ctx.fillRect(cobra[i].x * grade, cobra[i].y * grade, grade - 5, grade - 5);
-        if (cobra(i).x == positionx && cobra(i).y == positiony) {
+        if (cobra[i].x == positionx && cobra[i].y == positiony) {
             tam = 3
+            pontos = 0
+            console.log("Voce perdeu")
         }
     }
-
+    //POSSIÇÃO DA COBRA
+    cobra.push({ x: positionx, y: positiony })
 
 
     //Limitando a cobra
-
     while (cobra.length > tam) {
         cobra.shift();
 
     }
-
     // comida
     ctx.fillStyle = "#f1c40f"
     ctx.fillRect(comidax * grade, comiday * grade, grade - 8, grade - 8
     )
-
     //comendo 
     if (positionx == comidax && positiony == comiday) {
         tam++;
         comidax = Math.floor(Math.random() * grade);
         comiday = Math.floor(Math.random() * grade);
-
-
-
+        console.log(pontos)
     }
-
 
 }
 
